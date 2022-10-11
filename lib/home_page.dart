@@ -22,23 +22,41 @@ class _Home_pageState extends State<Home_page> {
     other()
   ];
   @override
+  void _onItemTapped(int index) {
+    setState(() {
+      curpage = index;
+    });
+  }
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-
-        index: curpage,
-        items: <Widget>[
-          Icon(Icons.home, size: 30),
-          Icon(Icons.search, size: 30),
-          Icon(Icons.play_circle_outline, size: 30),
-          Icon(Icons.library_books_sharp, size: 30),
-          Icon(Icons.other_houses_outlined, size: 30),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.play_circle_outline),
+            label: 'mycouse',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.library_books_sharp),
+            label: 'blog',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'settings',
+          ),
         ],
-        onTap: (index) {
-          setState(() {
-            curpage=index;
-          });
-        },
+        backgroundColor: Colors.blue,
+        currentIndex: curpage,
+
+        // selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
       body: curPage[curpage],
     );

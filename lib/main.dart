@@ -41,6 +41,10 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: Colors.grey[800],
                 appBarTheme: AppBarTheme(
                     backgroundColor: Colors.grey[800]
+                ),
+                bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                  unselectedItemColor:Colors.black ,
+                  selectedItemColor: Colors.blue,
                 )
 
             ),
@@ -53,10 +57,11 @@ class _MyAppState extends State<MyApp> {
                   backgroundColor: Colors.red
                 ),
               bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                backgroundColor: Colors.black
+                unselectedItemColor:Colors.white ,
+                selectedItemColor: Colors.blue,
               )
             ),
-            home: SplashScreen(),
+            home: Home_page(),
             // push
           );
         }) ,

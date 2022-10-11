@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wbappium/Provider/Thame_provider.dart';
 
 import '../wigdet/Custrom_appbar.dart';
+import '../wigdet/Header_text.dart';
 class other extends StatefulWidget {
   const other({Key? key}) : super(key: key);
 
@@ -37,159 +38,62 @@ class _otherState extends State<other> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Account  setting"),
+                Header_text("Account  setting"),
                 SizedBox(height: 10,),
-                Container(
-                  decoration: BoxDecoration(
-                      // color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 5.0,
-                            spreadRadius: 3.0,
-                            offset: Offset(0,3)
-                        )
-                      ]
-                  ),
-                  child: ListTile(
-                    leading: Icon(Icons.account_circle_outlined),
-                    title: Text("My Account"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-
-                ),
+                Custrom_design("My Account",Icons.account_circle_outlined),
                 SizedBox(height: 20,),
-                Container(
-                  decoration: BoxDecoration(
-                      // color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 5.0,
-                            spreadRadius: 3.0,
-                            offset: Offset(0,3)
-                        )
-                      ]
-                  ),
-                  child: ListTile(
-                    leading: Icon(Icons.share),
-                    title: Text("Share the app"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-
-                ),
+                Custrom_design("Share the app",Icons.share),
                 SizedBox(height: 20,),
-                Container(
-                  decoration: BoxDecoration(
-                      // color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 5.0,
-                            spreadRadius: 3.0,
-                            offset: Offset(0,3)
-                        )
-                      ]
-                  ),
-                  child: ListTile(
-                    leading: Icon(Icons.login),
-                    title: Text("Logout"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-
-                ),
+                Custrom_design("Logout",Icons.login),
                 SizedBox(height: 20,),
-                Text("Account  setting"),
+                Header_text("Custrom Page"),
                 SizedBox(height: 20,),
-                Container(
-                  decoration: BoxDecoration(
-                      // color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 5.0,
-                            spreadRadius: 3.0,
-                            offset: Offset(0,3)
-                        )
-                      ]
-                  ),
-                  child: ListTile(
-                    leading: Icon(Icons.wordpress_outlined),
-                    title: Text("Shop"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-
-                ),
+                Custrom_design("Shop",Icons.wordpress_outlined),
                 SizedBox(height: 20,),
-                Container(
-                  decoration: BoxDecoration(
-                      // color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 5.0,
-                            spreadRadius: 3.0,
-                            offset: Offset(0,3)
-                        )
-                      ]
-                  ),
-                  child: ListTile(
-                    leading: Icon(Icons.wordpress_outlined),
-                    title: Text("Privacy Policy"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-
-                ),
+                Custrom_design("Privacy Policy",Icons.policy),
                 SizedBox(height: 20,),
                 InkWell(
                   onTap: (){
-                    showLoadingDialog(themeChanger);
+                    showLoadingDialog(context,themeChanger);
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        // color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 5.0,
-                              spreadRadius: 3.0,
-                              offset: Offset(0,3)
-                          )
-                        ]
-                    ),
-                    child: ListTile(
-                      leading: Icon(Icons.wordpress_outlined),
-                      title: Text("Refund and Returns Policy"),
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
-
-                  ),
+                  child: Custrom_design("Theme Mode",Icons.dark_mode_outlined),
                 ),
               ],
             ),
           ),
         ),
       ),
-
     );
   }
-  void showLoadingDialog( themeChanger) {
+  Widget Custrom_design(String txt,dynamic icon){
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 5.0,
+                spreadRadius: 3.0,
+                offset: Offset(0,3)
+            )
+          ]
+      ),
+      child: ListTile(
+        leading: Icon(icon),
+        title: Text(txt),
+        trailing: Icon(Icons.arrow_forward_ios),
+      ),
+    );
+  }
+  void showLoadingDialog(BuildContext context,themeChanger){
     showDialog(
-
-      // barrierDismissible: false,
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return AlertDialog(
-
             title: const Text('Selection  theme mode'),
             content: Column(
-
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RadioListTile<ThemeMode>(
                   title: Text("light Mode"),
@@ -209,9 +113,7 @@ class _otherState extends State<other> {
                   groupValue: themeChanger.themeMode,
                   onChanged:
                   themeChanger.setTheme,
-
                 ),
-
               ],
             ),
           );

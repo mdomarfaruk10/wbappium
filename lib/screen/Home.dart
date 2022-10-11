@@ -5,6 +5,7 @@ import '../wigdet/Custrom_Row_grideview.dart';
 import '../wigdet/Custrom_appbar.dart';
 import '../wigdet/Custrom_cart.dart';
 import '../wigdet/Header_text.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
   
@@ -46,7 +47,8 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 10,),
                 Header_text("Mentors"),
                 SizedBox(height: 10,),
-                Custrom_Gridview( 20,"first",100.0,Mentors),
+                // Custrom_Gridview( 20,"first",100.0,Mentors),
+                Mentors(),
                 SizedBox(height: 10,),
                 Header_text("Recent Blog Posts"),
                 SizedBox(height: 10,),
@@ -77,32 +79,30 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget Mentors(String text,int index){
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          // borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.deepPurpleAccent.withOpacity(0.1),
-                blurRadius: 5.0,
-                spreadRadius: 3.0,
-                offset: Offset(0,3)
-            )
-          ]
-      ),
-      child: Column(
-        children: [
-          ClipRRect(
-            child: Image.asset("image/iphone.jpg",
-              height: size.height*0.11,
-              width: double.maxFinite,
-              fit: BoxFit.fill,
-            ),
-          ),
+  Widget Mentors(){
+    // Size size = MediaQuery.of(context).size;
+    return CarouselSlider(
+        items: [
+
+          Image.network(
+              'https://www.imagediamond.com/blog/wp-content/uploads/2020/06/cartoon-boy-images-17-1.jpg'),
+          Image.network(
+              'https://www.imagediamond.com/blog/wp-content/uploads/2020/06/cartoon-boy-images-19-1.jpg'),
+          Image.network(
+              'https://www.imagediamond.com/blog/wp-content/uploads/2020/06/cartoon-boy-images-18-1.jpg'),
+          Image.network(
+              'https://www.imagediamond.com/blog/wp-content/uploads/2020/06/cartoon-boy-images-16-1.jpg'),
         ],
-      ),
-    );
+        options: CarouselOptions(
+          height: 180.0,
+          initialPage: 0,
+          enlargeCenterPage: true,
+          autoPlay: true,
+          aspectRatio: 16 / 9,
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enableInfiniteScroll: true,
+          autoPlayAnimationDuration: Duration(milliseconds: 1200),
+          viewportFraction: 0.8,
+        ));
   }
 }

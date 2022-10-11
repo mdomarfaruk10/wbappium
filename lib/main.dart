@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:wbappium/Provider/Thame_provider.dart';
 import 'package:wbappium/Provider/auth_provider.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:wbappium/Provider/load_data_provider.dart';
 import 'package:wbappium/home_page.dart';
+import 'package:wbappium/screen/splash_screen.dart';
 
 
 void main() async {
@@ -26,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         providers: [
           ChangeNotifierProvider(create: (context) => AuthProvider()),
           ChangeNotifierProvider(create: (context) => Thame_Changer()),
-
+          ChangeNotifierProvider(create: (context) => LoadDataProvider()),
         ],
         child:Builder(builder: (BuildContext context){
           final  themeChanger = Provider.of<Thame_Changer>(context);
@@ -54,7 +56,7 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: Colors.black
               )
             ),
-            home: Home_page(),
+            home: SplashScreen(),
             // push
           );
         }) ,

@@ -33,5 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: TextStyle(color: Colors.green),
                 ),
               ));
+    //update
   }
 }

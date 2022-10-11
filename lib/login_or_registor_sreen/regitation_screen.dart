@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wbappium/Provider/auth_provider.dart';
+import 'package:wbappium/login_or_registor_sreen/Verify_Email_address.dart';
 import 'package:wbappium/login_or_registor_sreen/login_screen.dart';
 
 import '../wigdet/Custrom_button.dart';
@@ -68,7 +69,7 @@ class _registationState extends State<registation> {
                           onTap: ()async{
                             try{
                               await u_providerdata.createAccount("${u_providerdata.usersModel.uemail}", "${u_providerdata.usersModel.upassword}");
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>login()));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Verify_Email_address()));
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   content: Text(
                                     'Registration Successfully',

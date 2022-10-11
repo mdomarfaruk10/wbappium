@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wbappium/Provider/auth_provider.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:wbappium/login_or_registor_sreen/OtpVerification_Email.dart';
 import 'package:wbappium/login_or_registor_sreen/login_screen.dart';
 
 void main() async {
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: login(),
+          home: OtpVerification_Email(),
         ));
   }
 }

@@ -7,7 +7,7 @@ PreferredSizeWidget Custrom_appbar( String appBarTitle){
   ));
   return AppBar(
     elevation: 00,
-    backgroundColor:Colors.grey[800] ,
+    // backgroundColor:Colors.grey[800] ,
     title: Text(appBarTitle,style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
   );
 }

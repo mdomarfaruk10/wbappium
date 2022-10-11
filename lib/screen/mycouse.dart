@@ -18,7 +18,6 @@ class _mycouseState extends State<mycouse> {
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft:Radius.circular(10) ,
               topRight: Radius.circular(10),

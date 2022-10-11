@@ -15,12 +15,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
       appBar: Custrom_appbar("Welcome"),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft:Radius.circular(40) ,
                 topRight: Radius.circular(40),

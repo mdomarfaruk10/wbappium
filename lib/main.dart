@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wbappium/Provider/Thame_provider.dart';
 import 'package:wbappium/Provider/auth_provider.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:wbappium/login_or_registor_sreen/OtpVerification_Email.dart';
-import 'package:wbappium/login_or_registor_sreen/login_screen.dart';
+import 'package:wbappium/home_page.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,11 +25,40 @@ class _MyAppState extends State<MyApp> {
 
         providers: [
           ChangeNotifierProvider(create: (context) => AuthProvider()),
+          ChangeNotifierProvider(create: (context) => Thame_Changer()),
 
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: OtpVerification_Email(),
-        ));
+        child:Builder(builder: (BuildContext context){
+          final  themeChanger = Provider.of<Thame_Changer>(context);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: themeChanger.themeMode,
+            theme: ThemeData(
+              brightness: Brightness.light,
+              primarySwatch:Colors.grey,
+                backgroundColor: Colors.grey[800],
+                appBarTheme: AppBarTheme(
+                    backgroundColor: Colors.grey[800]
+                )
+
+            ),
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              primarySwatch: Colors.yellow,
+                backgroundColor: Colors.white,
+              primaryColor: Colors.white,
+                appBarTheme: AppBarTheme(
+                  backgroundColor: Colors.red
+                ),
+              bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                backgroundColor: Colors.black
+              )
+            ),
+            home: Home_page(),
+          );
+        }) ,
+
+    
+    );
   }
 }

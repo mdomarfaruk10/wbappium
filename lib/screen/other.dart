@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wbappium/Provider/Thame_provider.dart';
 
 import '../wigdet/Custrom_appbar.dart';
 class other extends StatefulWidget {
@@ -11,13 +13,14 @@ class other extends StatefulWidget {
 class _otherState extends State<other> {
   @override
   Widget build(BuildContext context) {
+    final  themeChanger = Provider.of<Thame_Changer>(context);
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      // backgroundColor: Colors.grey[800],
       appBar: Custrom_appbar("Others"),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            // color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft:Radius.circular(40) ,
               topRight: Radius.circular(40),
@@ -38,7 +41,7 @@ class _otherState extends State<other> {
                 SizedBox(height: 10,),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
@@ -59,7 +62,7 @@ class _otherState extends State<other> {
                 SizedBox(height: 20,),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
@@ -80,7 +83,7 @@ class _otherState extends State<other> {
                 SizedBox(height: 20,),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
@@ -103,7 +106,7 @@ class _otherState extends State<other> {
                 SizedBox(height: 20,),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
@@ -124,7 +127,7 @@ class _otherState extends State<other> {
                 SizedBox(height: 20,),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
@@ -143,25 +146,30 @@ class _otherState extends State<other> {
 
                 ),
                 SizedBox(height: 20,),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 5.0,
-                            spreadRadius: 3.0,
-                            offset: Offset(0,3)
-                        )
-                      ]
-                  ),
-                  child: ListTile(
-                    leading: Icon(Icons.wordpress_outlined),
-                    title: Text("Refund and Returns Policy"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
+                InkWell(
+                  onTap: (){
+                    showLoadingDialog(themeChanger);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        // color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 5.0,
+                              spreadRadius: 3.0,
+                              offset: Offset(0,3)
+                          )
+                        ]
+                    ),
+                    child: ListTile(
+                      leading: Icon(Icons.wordpress_outlined),
+                      title: Text("Refund and Returns Policy"),
+                      trailing: Icon(Icons.arrow_forward_ios),
+                    ),
 
+                  ),
                 ),
               ],
             ),
@@ -170,6 +178,44 @@ class _otherState extends State<other> {
       ),
 
     );
+  }
+  void showLoadingDialog( themeChanger) {
+    showDialog(
+
+      // barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+
+            title: const Text('Selection  theme mode'),
+            content: Column(
+
+              children: [
+                RadioListTile<ThemeMode>(
+                  title: Text("light Mode"),
+                  value: ThemeMode.light,
+                  groupValue: themeChanger.themeMode,
+                  onChanged:themeChanger.setTheme,
+                ),
+                RadioListTile<ThemeMode>(
+                  title: Text("Dark Mode"),
+                  value: ThemeMode.dark,
+                  groupValue: themeChanger.themeMode,
+                  onChanged:themeChanger.setTheme,
+                ),
+                RadioListTile<ThemeMode>(
+                  title: Text("system Mode"),
+                  value: ThemeMode.system,
+                  groupValue: themeChanger.themeMode,
+                  onChanged:
+                  themeChanger.setTheme,
+
+                ),
+
+              ],
+            ),
+          );
+        });
   }
 
 }

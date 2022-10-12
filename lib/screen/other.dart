@@ -16,7 +16,6 @@ class _otherState extends State<other> {
   Widget build(BuildContext context) {
     final  themeChanger = Provider.of<Thame_Changer>(context);
     return Scaffold(
-      // backgroundColor: Colors.grey[800],
       appBar: Custrom_appbar("Others"),
       body: SingleChildScrollView(
         child: Container(

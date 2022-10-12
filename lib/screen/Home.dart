@@ -94,7 +94,7 @@ class _HomeState extends State<Home> {
               'https://www.imagediamond.com/blog/wp-content/uploads/2020/06/cartoon-boy-images-16-1.jpg'),
         ],
         options: CarouselOptions(
-          height: 180.0,
+          height: 100.0,
           initialPage: 0,
           enlargeCenterPage: true,
           autoPlay: true,

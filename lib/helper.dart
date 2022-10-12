@@ -12,3 +12,9 @@ class Helper{
   static String url = "https://www.voltagelab.com/";
   static String category="wp-json/wp/v2/categories?_fields[]=id&_fields[]=name";
 }
+class Url_launchur_Helper{
+  static String url_facebook='https://www.facebook.com';
+  static String url_youtube = 'https://www.youtube.com';
+  static String url_instagram = 'https://www.instagram.com';
+  static String url_twitter = 'https://www.twitter.com';
+}

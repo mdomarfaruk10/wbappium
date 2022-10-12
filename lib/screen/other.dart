@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wbappium/Provider/Thame_provider.dart';
 
+import '../helper.dart';
 import '../wigdet/Custrom_appbar.dart';
 import '../wigdet/Header_text.dart';
 class other extends StatefulWidget {
@@ -41,7 +43,13 @@ class _otherState extends State<other> {
                 SizedBox(height: 10,),
                 Custrom_design("My Account",Icons.account_circle_outlined),
                 SizedBox(height: 20,),
-                Custrom_design("Share the app",Icons.share),
+                InkWell(
+                  onTap: (){
+                    _launchURL(Url_launchur_Helper.url_facebook);
+                  },
+                  child:Custrom_design("Share the app",Icons.share),
+                ),
+
                 SizedBox(height: 20,),
                 Custrom_design("Logout",Icons.login),
                 SizedBox(height: 20,),
@@ -49,7 +57,13 @@ class _otherState extends State<other> {
                 SizedBox(height: 20,),
                 Custrom_design("Shop",Icons.wordpress_outlined),
                 SizedBox(height: 20,),
-                Custrom_design("Privacy Policy",Icons.policy),
+                InkWell(
+                  onTap: (){
+                    _launchURL(Url_launchur_Helper.url_facebook);
+                  },
+                  child: Custrom_design("Privacy Policy",Icons.policy),
+                ),
+
                 SizedBox(height: 20,),
                 InkWell(
                   onTap: (){
@@ -84,6 +98,13 @@ class _otherState extends State<other> {
       ),
     );
   }
+  void _launchURL(String _url) async{
+    if(!await launch(_url))
+      throw 'Could not launch $_url';
+  }
+
+
+
   void showLoadingDialog(BuildContext context,themeChanger){
     showDialog(
         barrierDismissible: false,

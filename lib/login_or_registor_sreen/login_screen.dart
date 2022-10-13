@@ -59,7 +59,7 @@ class _loginState extends State<login> {
                           onTap: ()async{
                             try{
                               await u_providerdata.signIn("${u_providerdata.usersModel.uemail}", "${u_providerdata.usersModel.upassword}");
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Home_page()));
+                              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Home_page()));
                             }catch(e){
                               print('error caught:$e');
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

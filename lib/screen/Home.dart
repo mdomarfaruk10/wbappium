@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wbappium/model/category_model.dart';
 import 'package:wbappium/model/statricVariable.dart';
 import '../wigdet/Custrom_Column_gridview.dart';
 import '../wigdet/Custrom_Row_grideview.dart';
@@ -7,14 +8,18 @@ import '../wigdet/Custrom_cart.dart';
 import '../wigdet/Header_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  List<Categories> category = [];
+
+  Home({Key? key, required this.category}) : super(key: key);
   
   @override
   State<Home> createState() => _HomeState();
+
 }
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    print("check_length home: "+widget.category.length.toString());
     return Scaffold(
       appBar: Custrom_appbar("Welcome"),
       body: SingleChildScrollView(
@@ -52,7 +57,7 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 10,),
                 Header_text("Recent Blog Posts"),
                 SizedBox(height: 10,),
-                Column_gritview_builder(10 ,1,100.0,Columngridview),
+                Column_gritview_builder(3,1,100.0,Columngridview),
               ],
             ),
           ),

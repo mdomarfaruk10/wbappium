@@ -5,6 +5,7 @@ import 'package:wbappium/Provider/auth_provider.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:wbappium/Provider/load_data_provider.dart';
 import 'package:wbappium/home_page.dart';
+import 'package:wbappium/screen/splash_screen.dart';
 
 import 'Sub_screen/Theme_Page.dart';
 
@@ -62,7 +63,7 @@ class _MyAppState extends State<MyApp> {
                 selectedItemColor: Colors.blue,
               )
             ),
-            home: Home_page(),
+            home: SplashScreen(),
             // push
           );
         }) ,

@@ -5,22 +5,29 @@ import 'package:wbappium/screen/blog.dart';
 import 'package:wbappium/screen/mycouse.dart';
 import 'package:wbappium/screen/other.dart';
 import 'package:wbappium/screen/search.dart';
+
+import 'model/category_model.dart';
 class Home_page extends StatefulWidget {
-  const Home_page({Key? key}) : super(key: key);
+
+  List<Categories> category = [];
+
+  Home_page({Key? key, required this.category}) : super(key: key);
 
   @override
   State<Home_page> createState() => _Home_pageState();
+
 }
 
 class _Home_pageState extends State<Home_page> {
   int curpage = 0;
   List curPage = [
-    Home(),
+    Home(category: [],),
     search(),
     mycouse(),
     blog(),
     other()
   ];
+
   @override
   void _onItemTapped(int index) {
     setState(() {
@@ -28,6 +35,7 @@ class _Home_pageState extends State<Home_page> {
     });
   }
   Widget build(BuildContext context) {
+    print("check_length: "+widget.category.length.toString());
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -59,6 +67,7 @@ class _Home_pageState extends State<Home_page> {
         onTap: _onItemTapped,
       ),
       body: curPage[curpage],
+
     );
   }
 }

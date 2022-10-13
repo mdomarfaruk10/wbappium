@@ -49,8 +49,8 @@ class _Verify_Email_addressState extends State<Verify_Email_address> {
     await user!.reload();
     if (user.emailVerified) {
       timer!.cancel();
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Home_page()));
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => Home_page()));
     }
   }
 }

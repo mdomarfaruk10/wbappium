@@ -4,11 +4,7 @@ import 'package:wbappium/Provider/Thame_provider.dart';
 import 'package:wbappium/Provider/auth_provider.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:wbappium/Provider/load_data_provider.dart';
-import 'package:wbappium/home_page.dart';
 import 'package:wbappium/screen/splash_screen.dart';
-
-import 'Sub_screen/Theme_Page.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();

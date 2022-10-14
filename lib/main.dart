@@ -5,10 +5,33 @@ import 'package:wbappium/Provider/auth_provider.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:wbappium/Provider/load_data_provider.dart';
 import 'package:wbappium/screen/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
+  ThemeData activeTheme;
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();
-  runApp(const MyApp());
+  SharedPreferences.getInstance().then((pref) {
+   var themeColor= pref.getString("ThemeModee")??"Dark";
+   if(themeColor=="Dark"){
+     activeTheme=darkTheme;
+   }else if(themeColor=="Light"){
+     activeTheme=ligtTheme;
+   }else if(themeColor=="Green"){
+     activeTheme=greenTheme;
+   }else{
+     activeTheme=blueTheme;
+   }
+   runApp(MultiProvider(
+     providers: [
+       ChangeNotifierProvider(create: (context) => AuthProvider()),
+       ChangeNotifierProvider(create: (context) => Thame_Changer(activeTheme)),
+       ChangeNotifierProvider(create: (context) => LoadDataProvider()),
+     ],
+     child:MyApp(),
+   ));
+
+  });
+
 }
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,49 +43,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-
-        providers: [
-          ChangeNotifierProvider(create: (context) => AuthProvider()),
-          ChangeNotifierProvider(create: (context) => Thame_Changer()),
-          ChangeNotifierProvider(create: (context) => LoadDataProvider()),
-        ],
-        child:Builder(builder: (BuildContext context){
-          final  themeChanger = Provider.of<Thame_Changer>(context);
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            // theme: themeChanger.darkTheme? dark:light,
-            themeMode: themeChanger.themeMode,
-            theme: ThemeData(
-              brightness: Brightness.light,
-              primarySwatch:Colors.grey,
-                backgroundColor: Colors.grey[800],
-                appBarTheme: AppBarTheme(
-                    backgroundColor: Colors.grey[800]
-                ),
-                bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                  unselectedItemColor:Colors.black ,
-                  selectedItemColor: Colors.blue,
-                )
-
-            ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              primarySwatch: Colors.yellow,
-                backgroundColor: Colors.white,
-              primaryColor: Colors.white,
-                appBarTheme: AppBarTheme(
-                  backgroundColor: Colors.red
-                ),
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                unselectedItemColor:Colors.white ,
-                selectedItemColor: Colors.blue,
-              )
-            ),
-            home: SplashScreen(),
-            // push
-          );
-        }) ,
+    final  themeMode = Provider.of<Thame_Changer>(context);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themeMode.getTheme,
+      home: SplashScreen(),
+      // push
     );
+
   }
 }

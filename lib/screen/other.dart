@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wbappium/Provider/Thame_provider.dart';
-
 import '../helper.dart';
 import '../wigdet/Custrom_appbar.dart';
 import '../wigdet/Header_text.dart';
+import 'package:group_radio_button/group_radio_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class other extends StatefulWidget {
   const other({Key? key}) : super(key: key);
 
@@ -14,9 +15,27 @@ class other extends StatefulWidget {
 }
 
 class _otherState extends State<other> {
+  String _selectorColor = "Light";
+  List<String> _colors =["Dark","Light","Green","Blue"];
+  void onThemeChangeNofifier(String value,Thame_Changer? thame_changer)async{
+    if(value=="Dark"){
+      thame_changer = thame_changer!.setTheme(darkTheme);
+    }
+    else if(value=="Light"){
+      thame_changer = thame_changer!.setTheme(ligtTheme);
+    }
+    else if(value=="Green"){
+      thame_changer = thame_changer!.setTheme(greenTheme);
+    } else {
+      thame_changer = thame_changer!.setTheme(blueTheme);
+    }
+    final prefs =await SharedPreferences.getInstance();
+    prefs.setString("ThemeModee", value);
+  }
   @override
   Widget build(BuildContext context) {
-    final  themeChanger = Provider.of<Thame_Changer>(context);
+    final  themeMode = Provider.of<Thame_Changer>(context);
+    themeMode.getTheme;
     return Scaffold(
       appBar: Custrom_appbar("Others"),
       body: SingleChildScrollView(
@@ -49,7 +68,6 @@ class _otherState extends State<other> {
                   },
                   child:Custrom_design("Share the app",Icons.share),
                 ),
-
                 SizedBox(height: 20,),
                 Custrom_design("Logout",Icons.login),
                 SizedBox(height: 20,),
@@ -63,11 +81,10 @@ class _otherState extends State<other> {
                   },
                   child: Custrom_design("Privacy Policy",Icons.policy),
                 ),
-
                 SizedBox(height: 20,),
                 InkWell(
                   onTap: (){
-                    showLoadingDialog(context,themeChanger);
+                    showThemeDialog(themeMode);
                   },
                   child: Custrom_design("Theme Mode",Icons.dark_mode_outlined),
                 ),
@@ -98,46 +115,42 @@ class _otherState extends State<other> {
       ),
     );
   }
+
   void _launchURL(String _url) async{
     if(!await launch(_url))
       throw 'Could not launch $_url';
   }
 
-
-
-  void showLoadingDialog(BuildContext context,themeChanger){
+  void showThemeDialog(Thame_Changer thame_changer){
     showDialog(
-        barrierDismissible: false,
         context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Selection  theme mode'),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                RadioListTile<ThemeMode>(
-                  title: Text("light Mode"),
-                  value: ThemeMode.light,
-                  groupValue: themeChanger.themeMode,
-                  onChanged:themeChanger.setTheme,
+        builder: (_) =>StatefulBuilder(
+            builder:(BuildContext context,StateSetter setState){
+              return AlertDialog(
+                content: Container(
+                  height: 150,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RadioGroup<String?>.builder(
+                        groupValue: _selectorColor,
+                        onChanged: (val){
+                          setState((){
+                            _selectorColor = val!;
+                          });
+                          onThemeChangeNofifier(_selectorColor,thame_changer);
+                        },
+                        items: _colors,
+                        itemBuilder: (item)=>RadioButtonBuilder(item!),
+                      ),
+                    ],
+                  ),
                 ),
-                RadioListTile<ThemeMode>(
-                  title: Text("Dark Mode"),
-                  value: ThemeMode.dark,
-                  groupValue: themeChanger.themeMode,
-                  onChanged:themeChanger.setTheme,
-                ),
-                RadioListTile<ThemeMode>(
-                  title: Text("system Mode"),
-                  value: ThemeMode.system,
-                  groupValue: themeChanger.themeMode,
-                  onChanged:
-                  themeChanger.setTheme,
-                ),
-              ],
-            ),
-          );
-        });
+              );
+            }
+        )
+    );
   }
 
 }

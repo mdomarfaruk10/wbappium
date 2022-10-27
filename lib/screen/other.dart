@@ -15,8 +15,8 @@ class other extends StatefulWidget {
 }
 
 class _otherState extends State<other> {
-  String _selectorColor = "Light";
-  List<String> _colors =["Dark","Light","Green","Blue"];
+  String _selectorColor = "Dark";
+  List<String> _colors =["Dark","Light","Green","System"];
   void onThemeChangeNofifier(String value,Thame_Changer? thame_changer)async{
     if(value=="Dark"){
       thame_changer = thame_changer!.setTheme(darkTheme);
@@ -27,7 +27,7 @@ class _otherState extends State<other> {
     else if(value=="Green"){
       thame_changer = thame_changer!.setTheme(greenTheme);
     } else {
-      thame_changer = thame_changer!.setTheme(blueTheme);
+      thame_changer = thame_changer!.setTheme(SystemMode);
     }
     final prefs =await SharedPreferences.getInstance();
     prefs.setString("ThemeModee", value);
@@ -139,7 +139,7 @@ class _otherState extends State<other> {
                           setState((){
                             _selectorColor = val!;
                           });
-                          onThemeChangeNofifier(_selectorColor,thame_changer);
+                           onThemeChangeNofifier(_selectorColor,thame_changer);
                         },
                         items: _colors,
                         itemBuilder: (item)=>RadioButtonBuilder(item!),

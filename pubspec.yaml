@@ -48,6 +48,7 @@ dependencies:
   url_launcher: ^6.1.6
   animated_text_kit: ^4.2.2
   group_radio_button: ^1.2.0
+  flutter_local_notifications: ^12.0.3
 
 dev_dependencies:
   flutter_test:
